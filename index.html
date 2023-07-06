@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Booking</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+  <style>
+    .sign{
+       float: right;
+       padding-right: 18px;
+       border: 5px;
+       display: flex;
+       flex-direction: row;
+    }
+    .nav-link{
+        border-color: black;
+        background-color: #fff;
+        margin-bottom: 20px;
+        margin-right: 20px;
+        border-radius: 13px;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+    <div class="sign">
+    <a class="nav-link" href="login.html">Login</a>
+    <a class="nav-link" href="signup.html">Sign Up</a>
+    </div>
+  <header id="nav" class="bg-dark text-white p-4">
+    <h1 class="text-center">Flight Booking</h1>
+  </header>
+  
+  <main class="container py-4">
+    <section id="flight-search">
+      <h2>Search Flights</h2>
+      <form id="flight-search-form">
+        <div class="mb-3">
+          <label for="departure" class="form-label">Departure:</label>
+          <input type="text" id="departure" class="form-control" placeholder="Enter departure airport">
+        </div>
+
+        <div class="mb-3">
+          <label for="destination" class="form-label">Destination:</label>
+          <input type="text" id="destination" class="form-control" placeholder="Enter destination airport">
+        </div>
+
+        <div class="mb-3">
+          <label for="date" class="form-label">Date:</label>
+          <input type="date" id="date" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+    </section>
+
+    <section id="flight-results" class="mt-4">
+      <h2>Flight Results</h2>
+      <div id="results-container" class="row">
+        <!-- Flight results will be displayed here dynamically -->
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById("flight-search-form").addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevent form submission
+
+  // Retrieve user inputs
+  const departure = document.getElementById("departure").value;
+  const destination = document.getElementById("destination").value;
+  const date = document.getElementById("date").value;
+
+  // Make API request to fetch flight data based on user inputs
+  // Simulating flight data for demonstration purposes
+  const flightData = [
+    {
+      airline: "Airline A",
+      departure: "Airport X",
+      destination: "Airport Y",
+      departureTime: "09:00 AM",
+      arrivalTime: "11:00 AM",
+      price: "$200"
+    },
+    {
+      airline: "Airline B",
+      departure: "Airport X",
+      destination: "Airport Y",
+      departureTime: "12:00 PM",
+      arrivalTime: "02:00 PM",
+      price: "$250"
+    }
+    // Add more flight data objects here
+  ];
+
+  // Clear previous results
+  document.getElementById("results-container").innerHTML = "";
+  
+  flightData.forEach(function(flight) {
+    const flightCard = document.createElement("div");
+    flightCard.classList.add("col-md-6");
+  let arrival=document.getElementById("departure").value;
+  let dest=document.getElementById("destination").value;
+    flightCard.innerHTML = `
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3 class="card-title">${flight.airline}</h3>
+          <p><strong>Departure:</strong> ${arrival}</p>
+          <p><strong>Destination:</strong> ${dest}</p>
+          <p><strong>Departure Time:</strong> ${flight.departureTime}</p>
+          <p><strong>Arrival Time:</strong> ${flight.arrivalTime}</p>
+          <p><strong>Price:</strong> ${flight.price}</p>
+          <div class="text-end">
+            <button class="btn btn-primary">Book Now</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.getElementById("results-container").appendChild(flightCard);
+  });
+
+  // Show flight results section
+  document.getElementById("flight-results").style.display = "block";
+});
+
+  </script>
+</body>
+</html>
